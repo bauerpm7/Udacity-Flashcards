@@ -2,7 +2,7 @@ import React from 'react';
 import {Alert, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {addQuestion} from '../actions';
 import {connect} from 'react-redux';
-import {addQuestionForDeck} from '../api/storage';
+import {addQuestionForDeck} from '../utils/storage';
 
 class NewQuestion extends React.Component {
 

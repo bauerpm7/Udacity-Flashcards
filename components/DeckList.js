@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Dimensions, FlatList} from 'react-native';
 import {connect} from 'react-redux';
-import {getDecks} from '../../actions/index';
-import {fetchDecks} from '../../api/storage';
+import {getDecks} from '../actions/index';
+import {fetchDecks} from '../utils/storage';
 import SingleDeck from './SingleDeck';
 
 class DeckList extends React.Component {
@@ -30,7 +30,7 @@ class DeckList extends React.Component {
                 <FlatList
                     data={Object.values(this.props.decks).sort((a, b) => a.title > b.title)}
                     renderItem={this.renderItem}
-                    keyExtractor={(item, index) => index}/>
+                    keyExtractor={(item, index) => index.toString()}/>
             </View>
         );
     }

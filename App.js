@@ -3,15 +3,15 @@ import {View} from 'react-native';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducers/index.js';
-import {StackNavigator, TabNavigator} from 'react-navigation';
-import {setNotification} from './api/notification';
+import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
+import {setNotification} from './utils/notification';
 import NewDeck from './components/NewDeck';
 import DeckList from './components/DeckList.js';
 import IndividualDeck from './components/IndividualDeck.js';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz.js'
 
-const Tabs = TabNavigator({
+const Tabs = createMaterialTopTabNavigator({
         DeckList: {
             screen: DeckList,
             navigationOptions: {
@@ -27,7 +27,7 @@ const Tabs = TabNavigator({
     }
 );
 
-const AppNavigator = StackNavigator({
+const AppNavigator = createStackNavigator({
     Home: {
         screen: Tabs,
         navigationOptions: {title: 'Home'},
@@ -66,4 +66,4 @@ export default class App extends React.Component {
             </View>
         </Provider>
     }
-}
+};
