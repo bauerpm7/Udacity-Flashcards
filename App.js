@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import reducer from '../reducers/index.js';
+import reducer from './reducers/index.js';
 import {StackNavigator, TabNavigator} from 'react-navigation';
 import {setNotification} from '../api/notification';
 import NewDeck from './deck/NewDeck';
