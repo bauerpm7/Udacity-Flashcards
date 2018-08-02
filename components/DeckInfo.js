@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-class IndividualDeck extends React.Component {
+class DeckInfo extends React.Component {
 
     render() {
         let {title} = this.props.navigation.state.params;
@@ -12,7 +12,7 @@ class IndividualDeck extends React.Component {
             <View style={styles.container}>
                 <View style={{flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
                     <Text style={{fontSize: 36}}>{title}</Text>
-                    <Text style={{fontSize: 22, marginTop: 12}}>{questions.length} cards
+                    <Text style={{fontSize: 22, marginTop: 12}}>{questions.length} {questions.length > 1 ? 'cards' : 'card'}
                     </Text>
                 </View>
 
@@ -46,31 +46,48 @@ class IndividualDeck extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 20,
+        padding: 20,
+
     },
     addCard: {
-        backgroundColor: '#fff',
+        backgroundColor: '#3f51b5',
         margin: 24,
         padding: 10,
-        borderRadius: 7,
-        height: 45,
+        height: 50,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowRadius: 3,
+        shadowOpacity: 1
     },
     startQuiz: {
-        backgroundColor: '#000',
+        backgroundColor: '#f50057',
         margin: 24,
         padding: 10,
-        height: 45,
-        borderRadius: 2,
+        height: 50,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowRadius: 3,
+        shadowOpacity: 1
     },
     addCardTitle: {
-        color: '#000',
+        color: '#fff',
         fontSize: 22,
         textAlign: 'center',
+        lineHeight: 25
     },
     startQuizTitle: {
         color: '#fff',
         fontSize: 22,
         textAlign: 'center',
+        lineHeight: 25
     }
 });
 
@@ -80,4 +97,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(IndividualDeck);
+export default connect(mapStateToProps)(DeckInfo);

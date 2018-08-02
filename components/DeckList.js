@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Dimensions, FlatList} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Dimensions, FlatList, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import {getDecks} from '../actions/index';
 import {fetchDecks} from '../utils/storage';
-import SingleDeck from './SingleDeck';
+import Deck from './Deck';
 
 class DeckList extends React.Component {
 
@@ -16,8 +16,8 @@ class DeckList extends React.Component {
     renderItem = ({item}) => (
         <View style={styles.item}>
             <TouchableOpacity onPress={() =>
-                this.props.navigation.navigate('IndividualDeck', item)}>
-                <SingleDeck
+                this.props.navigation.navigate('DeckInfo', item)}>
+                <Deck
                     title={item.title}
                     questions={item.questions}/>
             </TouchableOpacity>

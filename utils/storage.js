@@ -5,6 +5,7 @@ export const DECKS_STORAGE_KEY = 'decks:udacicards';
 let data = {
     React: {
         title: 'React',
+        id: 1533047663982,
         questions: [
             {
                 question: 'What is React?',
@@ -18,6 +19,7 @@ let data = {
     },
     JavaScript: {
         title: 'JavaScript',
+        id: 1533047693733,
         questions: [
             {
                 question: 'What is a closure?',
@@ -29,10 +31,26 @@ let data = {
 };
 
 export function fetchDecks() {
+    AsyncStorage.clear();
     return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
         return results === null ? initialData() : JSON.parse(results)
     });
 }
+
+export async function removeDeck (deckId) {
+    try{
+        let decksJSON= await AsyncStorage.getItem(DECKS_STORAGE_KEY);
+        let usersArray = JSON.parse(decksJSON);
+        alteredDecks = decksArray.filter(function(e){
+            return e.id !== deckId.id
+
+        })
+        AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(alteredDecks));
+    }
+    catch(error){
+        console.log(error)
+    }
+};
 
 export function createDeck(deck) {
     return AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(deck));

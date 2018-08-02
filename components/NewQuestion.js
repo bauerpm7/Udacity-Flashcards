@@ -47,13 +47,13 @@ class NewQuestion extends React.Component {
 
         return (
             <View style={style.container}>
-                <Text>Question is </Text>
+                <Text>Enter New Question: </Text>
                 <TextInput
                     defaultValue="Question"
                     value={question}
                     style={style.input}
                     onChangeText={question => this.setState({question})}/>
-                <Text>Answer is </Text>
+                <Text>Enter Answer:</Text>
                 <TextInput
                     defaultValue="Answer"
                     value={answer}
@@ -75,25 +75,38 @@ const style = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 20,
+        padding: 20,
+        paddingTop: 50
     },
     input: {
-        width: 300,
-        height: 56,
+        width: '100%',
+        height: 50,
         padding: 12,
-        borderWidth: 1,
-        borderColor: '#7f7f7f',
-        margin: 16
+        margin: 20,
+        backgroundColor: '#fff',
+        borderRadius: 7,
+
     },
     submitButton: {
-        backgroundColor: '#000',
-        padding: 12,
-        height: 44,
+        backgroundColor: '#f50057',
+        margin: 24,
+        marginTop: 50,
+        padding: 10,
+        height: 50,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowRadius: 3,
+        shadowOpacity: 1
     },
     submitText: {
         color: '#fff',
         fontSize: 22,
         textAlign: 'center',
+        lineHeight: 25
     },
 });
 

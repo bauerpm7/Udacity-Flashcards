@@ -18,16 +18,16 @@ class AddDeck extends React.Component {
         if (!entry.text) {
             Alert.alert(
                 'Mandatory',
-                'Deck Name cannot be empty'
+                'Deck Name Cannot Be Empty'
             );
         } else {
             if (decks[entry.text]) {
                 Alert.alert(
                     'Error!',
-                    'Deck Already exists'
+                    'Deck Already Exists'
                 );
             } else {
-                const newDeck = {[entry.text]: {title: entry.text, questions: []}};
+                const newDeck = {[entry.text]: {title: entry.text, questions: [], id: Date.now()}};
 
                 this.props.dispatch(addDeck(newDeck));
                 createDeck(newDeck);
@@ -45,12 +45,13 @@ class AddDeck extends React.Component {
                 this.setState({text: ''});
             }
         }
+        console.log(decks)
     };
 
     render() {
         return (
             <View style={style.container}>
-                <Text style={{fontSize: 28}}>What is the title of your new deck ?</Text>
+                <Text style={style.title}>What is the title of your new deck ?</Text>
 
                 <TextInput
                     value={this.state.text}
@@ -73,26 +74,42 @@ const style = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 20,
+        padding: 20,
+    },
+    title: {
+        fontSize: 28,
+        marginTop: 30,
+        textAlign: 'center'
     },
     input: {
-        width: 300,
+        width: '100%',
         height: 44,
         padding: 8,
         borderWidth: 1,
         borderColor: '#fff',
         backgroundColor: '#fff',
-        margin: 24,
+        margin: 30
     },
     submitButton: {
-        backgroundColor: '#000',
+        marginTop: 30,
+        backgroundColor: '#f50057',
         padding: 10,
-        height: 44,
+        height: 50,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowRadius: 3,
+        shadowOpacity: 1
+
     },
     submitText: {
         color: '#fff',
         fontSize: 22,
         textAlign: 'center',
+        lineHeight: 25
     },
 });
 

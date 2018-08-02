@@ -7,11 +7,12 @@ import {createStackNavigator, createMaterialTopTabNavigator} from 'react-navigat
 import {setNotification} from './utils/notification';
 import NewDeck from './components/NewDeck';
 import DeckList from './components/DeckList.js';
-import IndividualDeck from './components/IndividualDeck.js';
+import DeckInfo from './components/DeckInfo.js';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz.js'
 
-const Tabs = createMaterialTopTabNavigator({
+const Tabs = createMaterialTopTabNavigator(
+    {
         DeckList: {
             screen: DeckList,
             navigationOptions: {
@@ -24,6 +25,16 @@ const Tabs = createMaterialTopTabNavigator({
                 tabBarLabel: 'New Deck',
             },
         },
+    },
+    {
+       tabBarOptions: {
+            style: {
+                backgroundColor: '#3f51b5'
+            },
+            indicatorStyle: {
+                backgroundColor: '#f50057'
+            }
+        },  
     }
 );
 
@@ -32,8 +43,8 @@ const AppNavigator = createStackNavigator({
         screen: Tabs,
         navigationOptions: {title: 'Home'},
     },
-    IndividualDeck: {
-        screen: IndividualDeck,
+    DeckInfo: {
+        screen: DeckInfo,
         navigationOptions: {
             headerTintColor: '#000',
         },

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-export default class SingleDeck extends React.Component {
+export default class Deck extends React.Component {
     render() {
         const {title, questions} = this.props;
 
@@ -9,7 +9,7 @@ export default class SingleDeck extends React.Component {
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Text style={{fontSize: 24}}>{title}</Text>
                 <Text style={{fontSize: 18, color: '#666666'}}>
-                    {questions && questions.length} cards
+                    {questions && questions.length} {questions.length > 1 ? 'cards' : 'card'}
                 </Text>
             </View>
         </View>
@@ -19,10 +19,19 @@ export default class SingleDeck extends React.Component {
 const styles = StyleSheet.create({
     deck: {
         flexDirection: 'row',
-        marginTop: 12,
         height: 120,
         backgroundColor: '#fff',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: 20,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 2,
+            height: 2
+        },
+        shadowRadius: 4,
+        shadowOpacity: 0.7
+
     },
 });

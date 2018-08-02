@@ -7,17 +7,17 @@ export default class Quiz extends React.Component {
     state = {
         questionIndex: 0,
         correctAnswers: 0,
-        shouldShowAnswer: false,
-    };
+        showAnswer: false,
+    }
 
     onCorrect = () => {
         const {questionIndex, correctAnswers} = this.state;
-        this.setState({questionIndex: questionIndex + 1, correctAnswers: correctAnswers + 1, shouldShowAnswer: false});
-    };
+        this.setState({questionIndex: questionIndex + 1, correctAnswers: correctAnswers + 1, showAnswer: false});
+    }
 
     startQuiz = () => {
-        this.setState({questionIndex: 0, correctAnswers: 0, shouldShowAnswer: false});
-    };
+        this.setState({questionIndex: 0, correctAnswers: 0, showAnswer: false});
+    }
 
     backToDeck = () => {
         this.props.navigation.goBack();
@@ -26,32 +26,32 @@ export default class Quiz extends React.Component {
 
     onIncorrect = () => {
         this.setState({questionIndex: this.state.questionIndex + 1});
-    };
+    }
 
     showAnswer = () => {
-        this.setState({shouldShowAnswer: !this.state.shouldShowAnswer});
-    };
+        this.setState({showAnswer: !this.state.showAnswer});
+    }
 
     render() {
-        const {questionIndex, correctAnswers, shouldShowAnswer} = this.state;
+        const {questionIndex, correctAnswers, showAnswer} = this.state;
         const {questions} = this.props.navigation.state.params;
-        const isQuestionAvailable = questionIndex < questions.length;
-        const questionLeft = questions.length - questionIndex;
+        const questionAvailable = questionIndex < questions.length;
+        
 
         return (
             <View style={{flex: 1}}>
-                {isQuestionAvailable ? (
+                {questionAvailable ? (
                     <View style={styles.container}>
 
-                        <View style={[styles.group, {justifyContent: 'flex-start', flex: 1}]}>
+                        <View style={{flex: 1}}>
                             <View>
-                                <Text>{questionLeft} / {questions.length}</Text>
+                                <Text style={styles.cardCounter}>{questionIndex+1} / {questions.length}</Text>
                             </View>
                         </View>
 
-                        <View style={[styles.group, {flex: 4}]}>
+                        <View style={{flex: 2}}>
                             <View>
-                                {shouldShowAnswer ? (
+                                {showAnswer ? (
                                     <View style={{alignItems: 'center'}}>
                                         <Text style={{fontSize: 36}}>{questions[questionIndex].answer}</Text>
 
@@ -74,25 +74,11 @@ export default class Quiz extends React.Component {
 
                         <View style={{alignItems: 'center', justifyContent: 'space-around', flex: 2}}>
                             <View style={styles.container}>
-
-                                <TouchableOpacity onPress={this.onCorrect}>
-                                  <Text style={{
-                                        backgroundColor: '#70dd2f',
-                                        justifyContent: 'center',
-                                        height: 30,
-                                        textAlign: 'center',
-                                        width: 200
-                                    }}>Correct</Text>
+                                <TouchableOpacity style={styles.correctBtn} onPress={this.onCorrect}>
+                                  <Text style = {styles.btnText}>Correct</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={this.onIncorrect} >
-                                  <Text style={{
-                                        backgroundColor: '#ff463f',
-                                        justifyContent: 'center',
-                                        height: 30,
-                                        textAlign: 'center',
-                                        width: 200,
-                                        marginTop: 20
-                                    }}>Incorrect</Text>
+                                <TouchableOpacity style={styles.incorrectBtn} onPress={this.onIncorrect} >
+                                  <Text style = {styles.btnText}>Incorrect</Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -103,29 +89,15 @@ export default class Quiz extends React.Component {
 
                 ) : (
                     <View style={styles.container}>
-                        <Text>Score: {correctAnswers}</Text>
+                        <Text style={{ textAlign: 'center'}}>Score: {correctAnswers}/{questions.length}</Text>
 
                         <View style={{alignItems: 'center', justifyContent: 'space-around', flex: 2}}>
                             <View style={styles.container}>
-
-                                <TouchableOpacity onPress={this.startQuiz}>
-                                    <Text style={{
-                                        backgroundColor: '#70dd2f',
-                                        justifyContent: 'center',
-                                        height: 30,
-                                        textAlign: 'center',
-                                        width: 200
-                                    }}>Start Quiz</Text>
+                                <TouchableOpacity style={styles.correctBtn} onPress={this.startQuiz}>
+                                    <Text style={styles.btnText}>Start Quiz</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={this.backToDeck}>
-                                    <Text style={{
-                                        backgroundColor: '#ff463f',
-                                        justifyContent: 'center',
-                                        height: 30,
-                                        textAlign: 'center',
-                                        width: 200,
-                                        marginTop: 20
-                                    }}>Back to Deck</Text>
+                                <TouchableOpacity style={styles.incorrectBtn} onPress={this.backToDeck}>
+                                    <Text style={styles.btnText}>Back to Deck</Text>
                                 </TouchableOpacity>
 
                             </View>
@@ -143,6 +115,47 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 20,
     },
+    cardCounter: {
+        textAlign: 'center',
+        fontSize: 16
+    },
+    correctBtn:{
+        backgroundColor: '#3f51b5',
+        margin: 24,
+        padding: 10,
+        height: 50,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowRadius: 3,
+        shadowOpacity: 1
+    },
+    incorrectBtn:{
+        backgroundColor: '#f50057',
+        margin: 24,
+        padding: 10,
+        height: 50,
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 1,
+            height: 1
+        },
+        shadowRadius: 3,
+        shadowOpacity: 1
+    },
+    btnText: {
+        color: '#fff',
+        justifyContent: 'center',
+        height: 30,
+        textAlign: 'center',
+        width: 200,
+        fontSize: 16,
+        lineHeight: 25
+    }
 });
 
 
