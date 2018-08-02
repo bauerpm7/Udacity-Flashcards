@@ -31,7 +31,6 @@ let data = {
 };
 
 export function fetchDecks() {
-    AsyncStorage.clear();
     return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
         return results === null ? initialData() : JSON.parse(results)
     });
